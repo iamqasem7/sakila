@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conexión a Base de Datos</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background-color: #080710;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .background {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      z-index: -1;
+    }
+    .background .shape {
+      height: 200px;
+      width: 200px;
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+    }
+    .shape:first-child {
+      background: linear-gradient(#1845ad, #23a2f6);
+      left: -80px;
+      top: -80px;
+    }
+    .shape:last-child {
+      background: linear-gradient(to right, #ff512f, #f09819);
+      right: -30px;
+      bottom: -80px;
+    }
+    #dbForm {
+      width: 90%;
+      max-width: 500px;
+      background-color: rgba(255,255,255,0.13);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,255,255,0.1);
+      box-shadow: 0 0 40px rgba(8,7,16,0.6);
+      padding: 40px 35px;
+      margin: 20px;
+    }
+    #dbForm * {
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+    #dbForm h2 {
+      font-size: 28px;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    #dbForm .form-label {
+      display: block;
+      margin-top: 15px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    #dbForm .form-control {
+      display: block;
+      height: 50px;
+      width: 100%;
+      background-color: rgba(255,255,255,0.07);
+      border-radius: 3px;
+      padding: 0 15px;
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 300;
+      border: none;
+      color: white;
+    }
+    #dbForm .form-control:focus {
+      background-color: rgba(255,255,255,0.1);
+      outline: none;
+      box-shadow: none;
+    }
+    ::placeholder {
+      color: #e5e5e5;
+    }
+    #dbForm .btn {
+  margin-top: 30px;
+  width: 100%;
+  background-color: #4CAF50; /* Changed to green */
+  color: white; /* Changed from #080710 to white */
+  padding: 15px 0;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+}
+
+#dbForm .btn:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: translateY(-2px);
+}
+
+#dbForm .btn:active {
+  transform: translateY(0);
+}
+      
+    
+    #errorMessage {
+      margin-top: 20px;
+      color: #ff6b6b;
+      text-align: center;
+      display: none;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+
+  <form id="dbForm">
+    <h2>Conexión a la base de datos Sakila</h2>
+
+    <div class="mb-3">
+      <label for="host" class="form-label">Host</label>
+      <input type="text" class="form-control" id="host" placeholder="Ej: localhost" required />
+    </div>
+    <div class="mb-3">
+      <label for="port" class="form-label">Puerto</label>
+      <input type="number" class="form-control" id="port" value="3306" required />
+    </div>
+    <div class="mb-3">
+      <label for="database" class="form-label">Nombre de la base de datos</label>
+      <input type="text" class="form-control" id="database" placeholder="Ej: sakila" required />
+    </div>
+    <div class="mb-3">
+      <label for="user" class="form-label">Usuario</label>
+      <input type="text" class="form-control" id="user" placeholder="Ej: root" required />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <input type="password" class="form-control" id="password" placeholder="Introduce tu contraseña" />
+    </div>
+
+    <div id="errorMessage" class="text-danger mb-3"></div>
+
+    <button type="submit" class="btn btn-primary">
+      <span id="buttonText">Conectar</span>
+      <span id="buttonSpinner" style="display:none;">
+        <i class="fas fa-spinner fa-spin"></i> Conectando...
+      </span>
+    </button>
+  </form>
+
+  <script type="module" src="../dist/scripts/login.js"></script>
+</body>
+</html>
